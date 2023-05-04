@@ -6,5 +6,5 @@ const stream = fs.createReadStream( path.join('./01-read-file' ,'text.txt'), 'ut
 let data = ''
 
 stream.on('data', chunk => data += chunk)
-stream.on('end', () => stdout.write(data))
+stream.on('end', () => stdout.write(data + '\n'))
 stream.on('error', error => stdout.write('Error', error.message))
