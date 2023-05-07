@@ -38,8 +38,8 @@ let styles = promises.readdir("./06-build-page/styles",
 
 function copyDir(src, dst, temp='') {
 
-    src = "./06-build-page/assets/" + temp
-    dst = "./06-build-page/project-dist/assets/" + temp
+    src = src + temp
+    dst = dst + temp
 
     promises.mkdir(dst, {recursive: true})
     let assets = promises.readdir(src,
