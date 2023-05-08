@@ -48,12 +48,12 @@ function copyDir(src, dst, temp='') {
             files.forEach(file => {
 
                 if (file.isDirectory()) {
-                    temp = file.name + '/'
+                    temp = '/' + file.name
                     copyDir(src, dst, temp)
                 }
                 else {
-                    promises.copyFile(src + `${file.name}`,
-                    dst + `${file.name}`)
+                    promises.copyFile(src + '/' + `${file.name}`,
+                    dst + '/' + `${file.name}`)
                 }
             })
         }
@@ -62,10 +62,10 @@ function copyDir(src, dst, temp='') {
         {withFileTypes: true})
     filesCopy.then(files => {
             files.forEach(file => {
-                fs.stat(src + `${file.name}`,
+                fs.stat(src + '/' + `${file.name}`,
                     (err) => {
                         if (err) {
-                            promises.rm(dst + `${file.name}`)
+                            promises.rm(dst + '/' + `${file.name}`)
                         }
                     })
             })
@@ -73,4 +73,4 @@ function copyDir(src, dst, temp='') {
     )
 }
 console.log("Procedure completed")
-copyDir("./06-build-page/assets/", "./06-build-page/project-dist/assets/")
+copyDir("./06-build-page/assets", "./06-build-page/project-dist/assets")
