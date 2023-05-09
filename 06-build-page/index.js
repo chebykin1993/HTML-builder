@@ -58,19 +58,24 @@ function copyDir(src, dst, temp='') {
             })
         }
     )
-    let filesCopy = promises.readdir(dst,
-        {withFileTypes: true})
-    filesCopy.then(files => {
-            files.forEach(file => {
-                fs.stat(src + '/' + `${file.name}`,
-                    (err) => {
-                        if (err) {
-                            promises.rm(dst + '/' + `${file.name}`)
-                        }
-                    })
-            })
-        }
-    )
+    assets.then( () => {
+
+        let filesCopy = promises.readdir(dst,
+            {withFileTypes: true})
+        filesCopy.then(files => {
+                files.forEach(file => {
+                    fs.stat(src + '/' + `${file.name}`,
+                        (err) => {
+                            if (err) {
+                                promises.rm(dst + '/' + `${file.name}`)
+                            }
+                        })
+                })
+            }
+        )
+    }
+ )
 }
+
 console.log("Procedure completed")
 copyDir("./06-build-page/assets", "./06-build-page/project-dist/assets")
